@@ -36,7 +36,7 @@ char	*ft_strdup(const char *s)
 
 	if (!s)
 		return (NULL);
-	len = ft_strlen(s);
+	len = ft_slen(s);
 	dest = malloc((len + 1) * sizeof(char));
 	if (!dest)
 		return (NULL);
@@ -50,7 +50,7 @@ char	*ft_strdup(const char *s)
 	return (dest);
 }
 
-size_t	ft_strlen(const char *str)
+size_t	ft_slen(const char *str)
 {
 	size_t	len;
 
@@ -70,7 +70,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	sub_len = ft_strlen(s);
+	sub_len = ft_slen(s);
 	if (start >= sub_len)
 		return (ft_strdup(""));
 	if (start + len > sub_len)
@@ -95,8 +95,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	len2;
 	size_t	i;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
+	len1 = ft_slen(s1);
+	len2 = ft_slen(s2);
 	if (s1 == NULL && s2 == NULL)
 		return (NULL);
 	dst = malloc((len1 + len2 + 1) * sizeof(char));

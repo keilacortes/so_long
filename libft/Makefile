@@ -29,7 +29,6 @@ SRCS = ft_isalpha.c\
        ft_calloc.c\
        ft_strdup.c\
        ft_substr.c\
-       ft_strjoin.c\
        ft_strtrim.c\
        ft_split.c\
        ft_itoa.c\
@@ -44,6 +43,10 @@ PRINTF_SRC = ./ft_printf/ft_printf.c \
              ./ft_printf/ft_putptr_fd.c\
              ./ft_printf/ft_putstr_fd.c\
              ./ft_printf/ft_putunsigned_fd.c
+
+GNL_SRC = ./get_next_line/get_next_line.c \
+          ./get_next_line/get_next_line_utils.c
+
 SRCS_BONUS = ft_lstsize_bonus.c\
              ft_lstnew_bonus.c\
              ft_lstadd_front_bonus.c\
@@ -54,7 +57,7 @@ SRCS_BONUS = ft_lstsize_bonus.c\
              ft_lstiter_bonus.c\
              ft_lstmap_bonus.c
 
-OBJS = $(SRCS:.c=.o) $(PRINTF_SRC:.c=.o)
+OBJS = $(SRCS:.c=.o) $(PRINTF_SRC:.c=.o) $(GNL_SRC:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 %.o: %.c
