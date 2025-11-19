@@ -18,12 +18,12 @@ static char	*init_line(char **save_rest)
 
 	if (*save_rest)
 	{
-		line_read = ft_strdup(*save_rest);
+		line_read = ft_strdupgnl(*save_rest);
 		free(*save_rest);
 		*save_rest = NULL;
 	}
 	else
-		line_read = ft_strdup("");
+		line_read = ft_strdupgnl("");
 	return (line_read);
 }
 
@@ -67,11 +67,11 @@ static char	*extract_line_and_save_rest(char *line_read, char **save_rest)
 	{
 		len = nl_ptr - line_read + 1;
 		next_line = ft_substr(line_read, 0, len);
-		*save_rest = ft_strdup(line_read + len);
+		*save_rest = ft_strdupgnl(line_read + len);
 	}
 	else
 	{
-		next_line = ft_strdup(line_read);
+		next_line = ft_strdupgnl(line_read);
 		*save_rest = NULL;
 	}
 	return (next_line);

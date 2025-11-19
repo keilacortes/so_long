@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdupgnl(const char *s)
 {
 	int		i;
 	int		len;
@@ -72,7 +72,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	sub_len = ft_slen(s);
 	if (start >= sub_len)
-		return (ft_strdup(""));
+		return (ft_strdupgnl(""));
 	if (start + len > sub_len)
 		len = sub_len - start;
 	sub_str = malloc((len + 1) * sizeof(char));
