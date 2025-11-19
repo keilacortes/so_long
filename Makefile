@@ -2,23 +2,33 @@ NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
+LIBFT = libft/libft.a
+
 SRCS = $(addprefix srcs/, main.c \
-       			  )
+                          map_read.c \
+						  so_long_utils.c \
+						  valid_map.c \
+                  )
 
-OBJ = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
+
+$(LIBFT):
+	make -C libft
+
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -L./libft -lft -o $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O3 -c $< -o $@
-
-$(NAME): $(OBJ)
-		$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(CFLAGS) -I./inc -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	make clean -C ./libft
+	rm -f $(OBJS)
 
 fclean: clean
+	make fclean -C ./libft
 	rm -f $(NAME)
 
 re: fclean all

@@ -96,14 +96,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line_read = init_line(&save_rest);
 	line_read = read_and_append(fd, line_read);
-	if (!line_read || line_read[0] == '\0')
+	if (!line_read)
+		return (NULL);
+	if (line_read[0] == '\0')
 	{
 		free(line_read);
-		if (save_rest)
-		{
-			free(save_rest);
-			save_rest = NULL;
-		}
 		return (NULL);
 	}
 	next_line = extract_line_and_save_rest(line_read, &save_rest);
