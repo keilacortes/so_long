@@ -1,4 +1,5 @@
 // header
+
 #include "so_long.h"
 
 int count_lines(int fd)
@@ -37,7 +38,6 @@ char **allocate_map(int fd, t_game *game)
     map = malloc(sizeof(char *) * (game->map_height + 1));
     if (!map)
         return (NULL);
-
     while (i < game->map_height)
     {
         line = get_next_line(fd);
@@ -64,29 +64,22 @@ char **read_map(const char *file, t_game *game)
     fd = open(file, O_RDONLY);
     if (fd < 0)
         return (NULL);
-
     game->map_height = count_lines(fd);
     if (game->map_height == 0)
     {
         close(fd);
         return (NULL);
     }
-
     close(fd);
-
     fd = open(file, O_RDONLY);
     if (fd < 0)
         return (NULL);
-
     map = allocate_map(fd, game);
     close(fd);
-
     if (!map || game->map_height == 0 || map[0] == NULL)
         return (NULL);
-
     game->map = map;
     game->map_width = ft_strlen(map[0]);
-    
     return (map);
 }
 
