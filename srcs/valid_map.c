@@ -36,7 +36,7 @@ int	valid_walls(t_game *game, int width, int height)
 	return (1);
 }
 
-void	count_components(t_game *game, int *player, int *exit, int *collect)
+void	count_components(t_game *game, int *player, int *exit, int *collect, int *invalid)
 {
 	int	i;
 	int	j;
@@ -44,6 +44,7 @@ void	count_components(t_game *game, int *player, int *exit, int *collect)
 	*player = 0;
 	*exit = 0;
 	*collect = 0;
+	*invalid = 0;
 	i = 0;
 	while (game->map[i])
 	{
@@ -56,6 +57,8 @@ void	count_components(t_game *game, int *player, int *exit, int *collect)
 				(*exit)++;
 			else if (game->map[i][j] == 'C')
 				(*collect)++;
+			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
+				(*invalid)++;
 			j++;
 		}
 		i++;
@@ -67,12 +70,13 @@ int	valid_components(t_game *game)
 	int	player;
 	int	exit;
 	int	collect;
+	int	invalid;
 
-	count_components(game, &player, &exit, &collect);
+	count_components(game, &player, &exit, &collect, &invalid);
 	game->collect = collect;
 	if (player == 1)
 		find_position(game->map, &game->player_pos.x, &game->player_pos.y, 'P', game->map_width, game->map_height);
-	if (player != 1 || exit != 1 || collect < 1)
+	if (player != 1 || exit != 1 || collect < 1 || invalid > 0)
 		return (0);
 	return (1);
 }
