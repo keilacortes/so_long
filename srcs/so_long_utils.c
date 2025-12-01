@@ -2,58 +2,58 @@
 
 #include "so_long.h"
 
-void    free_map(char **map)
+void	error_exit(char *message)
 {
-    int i;
-
-    i = 0;
-    while (map[i])
-    {
-        free(map[i]);
-        i++;
-    }
-    free(map);
+	ft_printf("Error\n%s", message);
+	exit(1);
 }
 
-void trim_line(char *line)
+void	free_map(char **map)
 {
-    int len;
+	int i;
 
-    len = ft_strlen(line);
-    while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r'))
-    {
-        line[len - 1] = '\0';
-        len--;
-    }
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
 
-void    error_exit(char *message)
+void	trim_line(char *line)
 {
-    ft_printf("Error\n%s", message);
-    exit(1);
+	int len;
+
+	len = ft_strlen(line);
+	while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r'))
+	{
+		line[len - 1] = '\0';
+		len--;
+	}
 }
 
-void	find_player_position(t_game *game)
+void	find_position(char **map, int *x, int *y, char c, int width, int height)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < game->map_height)
+	while (i < height)
 	{
 		j = 0;
-		while (j < game->map_width)
+		while (j < width)
 		{
-			if (game->map[i][j] == 'P')
+			if (map[i][j] == c)
 			{
-				game->player_pos.x = j;
-				game->player_pos.y = i;
-				return;
+				*x = j;
+				*y = i;
+				return ;
 			}
 			j++;
 		}
 		i++;
 	}
-	game->player_pos.x = -1;
-	game->player_pos.y = -1;
+	*x = -1;
+	*y = -1;
 }
